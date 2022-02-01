@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VIEW FROM THE EDGE{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div data-wow-duration="0.75s"  class="col-12 logo-col wow animate__animated animate__fadeInDown">
+                <div class="line-top"></div>
+                <div class="line-bottom"></div>
+                <div class="logo-div">
+                    <div class="logo-desc"><h1> //The best <b>news</b> page for <span>netrunners</span> </h1></div>
+                    <div class="logo-box">
+                        <img src="{{ asset('build/images/logo.png') }}" alt="View from the edge logo">
+                    </div>
+                </div>
+            </div>
+            <div data-wow-duration="0.75s" data-wow-delay="1.5s" class="col-12 sort-col wow animate__animated animate__fadeIn">
+                <nav class="sorting">
+                    <p>Sort By</p>
+                    {# sorting of properties based on query components #}
+                    <ul>
+                    <li>{{ knp_pagination_sortable(pagination, 'Date', 'a.date', {}, {'direction': 'desc'})}}</li>
+                    <li {% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'Title', 'a.title', {}, {'direction': 'asc'}) }}
+                    </li>
+                    <ul>
+                </nav>
+            </div>
+            {# {% for data in list %}
+            <div class="col-12 col-lg-6 col-xl-4">
+                <div class="single-news">
+                    <h2>
+                        {{ data.title }}
+                    </h2>
+                    <img src="{{ data.image }}">
+                    <p> Publishing date: {{data.date|date("d/m/Y")}} </p>
+                </div>
+            </div>
+            {% endfor %} #}
+            {% for article in pagination %}
+                <div data-wow-duration="0.75s" data-wow-delay="1s" class="col-12 col-md-6 col-xl-4 wow animate__animated animate__fadeInUp">
+                    <div class="single-news">
+                        <div class="img-box"><img src="{{ article.image }}"></div>
+                        <h2>{{ article.title }}</h2>
+                        <p> Publishing date: {{article.date|date("d/m/Y")}} </p>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+    {# display navigation #}
+    <div data-wow-duration="0.5s" class="navigation wow animate__animated animate__fadeInUp">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

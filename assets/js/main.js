@@ -1,0 +1,1 @@
+function viewBasic(){document.querySelector(".container").style.opacity=1,function e(){"function"==typeof WOW?((new WOW).init(),console.log(WOW)):setTimeout(e,500)}()}function docReady(e){"complete"===document.readyState||"interactive"===document.readyState?setTimeout(e,100):document.addEventListener("DOMContentLoaded",e)}docReady(viewBasic);
